@@ -4,12 +4,12 @@
 from rpi_ws281x import PixelStrip, Color
 import time
 
-LEDCOUNT = 5       # Number of LEDs
+LEDCOUNT = 10       # Number of LEDs
 GPIOPIN = 18
 FREQ = 800000
 DMA = 5
 INVERT = False       # Invert required when using inverting buffer and we aren't
-BRIGHTNESS = 100
+BRIGHTNESS = 80
 
 rainbow = [
 	Color(255,0,0),   # red
@@ -20,15 +20,19 @@ rainbow = [
 	Color(75,0,130),  # indigo
 	Color(143,0,255)  # violet
 	]
+
 strip = PixelStrip(LEDCOUNT, GPIOPIN, FREQ, DMA, INVERT, BRIGHTNESS) # Intialize the library (must be called once before other functions).
 
 strip.begin()
+index = 0
+first = True
 while True:
-    for index in range(len(rainbow)+LEDCOUNT):
-        for pixel in range(LEDCOUNT):
-            color = index - pixel
-            if (color < 0 or color >= len(rainbow)): strip.setPixelColor(pixel, Color(0,0,0))
-            else: strip.setPixelColor(pixel, rainbow[color])
-        strip.show()
-        time.sleep(0.5)
-
+	for pixel in range(LEDCOUNT):
+		color = index - pixel 
+		if (not first): color = color % len(rainbow)
+		if (color < 0 or color >= len(rainbow)): strip.setPixelColor(pixel, Color(0,0,0))
+		else: strip.setPixelColor(pixel, rainbow[color])
+	strip.show()
+	time.sleep(0.1)
+	index = (index + 1)%(LEDCOUNT+len(rainbow))
+	if(index == len(rainbow)):	first = False
