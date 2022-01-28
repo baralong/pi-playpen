@@ -9,15 +9,15 @@ GPIOPIN = 18
 FREQ = 800000
 DMA = 5
 INVERT = False       # Invert required when using inverting buffer and we aren't
-BRIGHTNESS = 80
+BRIGHTNESS = 40
 
 rainbow = [
-	Color(255,0,0),   # red
+	Color(200,0,0),   # red
 	Color(255,127,0), # orange
-	Color(255,255,0), # yellow
+	#Color(255,255,0), # yellow
 	Color(0,255,0),   # green
 	Color(0,0,255),   # blue
-	Color(75,0,130),  # indigo
+	# Color(75,0,130),  # indigo
 	Color(143,0,255)  # violet
 	]
 
@@ -33,6 +33,6 @@ while True:
 		if (color < 0 or color >= len(rainbow)): strip.setPixelColor(pixel, Color(0,0,0))
 		else: strip.setPixelColor(pixel, rainbow[color])
 	strip.show()
-	time.sleep(0.1)
+	time.sleep(0.4)
 	index = (index + 1)%(LEDCOUNT+len(rainbow))
 	if(index == len(rainbow)):	first = False
