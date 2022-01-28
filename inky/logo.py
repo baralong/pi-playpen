@@ -16,7 +16,7 @@ PATH = os.path.dirname(__file__)
 
 # Set up the Inky display
 try:
-    inky_display = InkyPHAT('red')
+    inky_display = InkyPHAT('black')
 except TypeError:
     raise TypeError("You need to update the Inky library to >= v1.1.0")
 
