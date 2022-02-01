@@ -1,7 +1,7 @@
-from inky import InkyPHAT
+from inky.auto import auto
 from PIL import Image, ImageFont, ImageDraw
 
-inky_display = InkyPHAT("red")
+inky_display = auto()
 inky_display.set_border(inky_display.RED)
 
 img = Image.new("P", (inky_display.WIDTH, inky_display.HEIGHT))
@@ -10,7 +10,7 @@ from font_fredoka_one import FredokaOne
 from font_source_sans_pro import SourceSansPro
 y = 5
 for h in range (5,50,5):
-    font = ImageFont.truetype(SourceSansPro, h)
+    font = ImageFont.truetype(FredokaOne, h)
     message = f"Hello, World! {h}"
     w, h = font.getsize(message)
     x = (inky_display.WIDTH / 2) - (w / 2)

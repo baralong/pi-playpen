@@ -2,8 +2,8 @@
 
 import os
 from PIL import Image
-from inky import InkyPHAT
-
+from inky.auto import auto
+from inky import inky
 
 print("""Inky pHAT/wHAT: Logo
 
@@ -16,12 +16,12 @@ PATH = os.path.dirname(__file__)
 
 # Set up the Inky display
 try:
-    inky_display = InkyPHAT('red')
+    inky_display = auto()
 except TypeError:
     raise TypeError("You need to update the Inky library to >= v1.1.0")
 
 try:
-    inky_display.set_border(inky_display.BLACK)
+    inky_display.set_border(inky.BLACK)
 except NotImplementedError:
     pass
 

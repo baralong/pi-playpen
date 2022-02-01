@@ -1,15 +1,15 @@
-from inky import InkyPHAT, inky
+from inky import inky
+from inky.auto import auto
 from PIL import Image, ImageFont, ImageDraw
 import math
 
-inky_display = InkyPHAT("red")
-#inky_display.border_colour(InkyPHAT.RED)
-#inky_display = inky.Inky(resolution=(106,104),colour='red')
+inky_display = auto()
+#inky_display.border_colour(inky.RED)
 
-colors = [InkyPHAT.WHITE, InkyPHAT.WHITE, InkyPHAT.RED, InkyPHAT.WHITE, InkyPHAT.WHITE, inky.BLACK]
+colors = [inky.WHITE, inky.RED, inky.WHITE, inky.BLACK]
 drawColor = ['white','black','red']
 colorCount = len(colors)
-colorWidth = 5
+colorWidth = 10
 
 def getColor(x,y):
     """use the x and y values to calculate the color to display"""
