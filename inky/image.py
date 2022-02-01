@@ -2,7 +2,7 @@ from inky import InkyPHAT, inky
 from PIL import Image, ImageFont, ImageDraw
 import math
 
-inky_display = InkyPHAT("red")
+inky_display = InkyPHAT("black")
 #inky_display.border_colour(InkyPHAT.RED)
 #inky_display = inky.Inky(resolution=(106,104),colour='red')
 
