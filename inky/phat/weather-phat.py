@@ -59,9 +59,9 @@ inky_display.set_border(inky_display.BLACK)
 
 # Details to customise your weather display
 
-CITY = "Sheffield"
-COUNTRYCODE = "GB"
-WARNING_TEMP = 25.0
+CITY = "Perth"
+COUNTRYCODE = "AU"
+WARNING_TEMP = 35.0
 
 
 # Convert a city name and country code to latitude and longitude

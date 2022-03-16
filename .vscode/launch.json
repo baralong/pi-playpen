@@ -9,7 +9,7 @@
             "type": "python",
             "request": "launch",
             "program": "${file}",
-            "args": ["--type=phat", "--colour=red", "--name=Doug", "--number=6"],
+            "args": [],
             "console": "integratedTerminal",
             "justMyCode": false
         }
