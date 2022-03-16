@@ -5,10 +5,10 @@ inky_display = InkyPHAT("red")
 #inky_display.border_colour(InkyPHAT.RED)
 #inky_display = inky.Inky(resolution=(106,104),colour='red')
 
-colors = [InkyPHAT.WHITE, InkyPHAT.BLACK, InkyPHAT.WHITE, InkyPHAT.RED]
+colors = [InkyPHAT.WHITE, InkyPHAT.BLACK, InkyPHAT.RED]
 drawColor = ['white','black','red']
 colorCount = len(colors)
-colorWidth = 10
+colorWidth = 1
 
 def getColor(x,y):
     """use the x and y values to calculate the color to display"""
@@ -26,7 +26,6 @@ for x in range(inky_display.width):
         color = getColor(x,y)
         inky_display.set_pixel(x,y,color)
         draw.point([x, y], drawColor[color])
-        print (x,y, color, drawColor[color])
 print("pixles set")
 img.save(fp='/home/pi/dev/pi-playpen/inky/res.png', format='png')
 inky_display.set_image(img)
