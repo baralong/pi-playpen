@@ -15,8 +15,6 @@ HOSTPREFIX="02"     # hex, two digits only
 DEVICEPREFIX="06"   # hex, two digits only
 MANUFACTURER="Baralong"
 PRODUCT='USB Gadget Device'
-MASSSTORAGE=0
-#
 
 # calculate MAC addresses
 padded='00000000000000'$SERIAL
