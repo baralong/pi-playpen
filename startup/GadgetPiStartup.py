@@ -6,6 +6,7 @@ import socket
 import os
 import shutil 
 import getpass
+import psutil
 
 def format_bytes(size):
     # 2**10 = 1024
@@ -22,7 +23,6 @@ inky_display.set_border(inky_display.WHITE)
 
 img = Image.new("P", (inky_display.WIDTH, inky_display.HEIGHT))
 draw = ImageDraw.Draw(img)
-vga_font = os.path.dirname(os.path.realpath(__file__)) + '/Perfect DOS VGA 437.ttf' 
 font_awesome_brands = ImageFont.truetype('./Font Awesome 6 Brands-Regular-400.otf', 24)
 font_dejavu = ImageFont.truetype('/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf',24)
 y = 5
@@ -35,6 +35,7 @@ texth = max(pih, hosth)
 # draw a box around the text with 5 pixel padding
 draw.rounded_rectangle([(x,y),(x+piw+hostw+12, y+texth+10)],
                        5, inky_display.RED, inky_display.BLACK, 2)
+titlebb = y+texth+10
 x += 5
 y += 5 + (texth / 2)
 draw.text((x, y+2), rpi, inky_display.WHITE, font_awesome_brands, 'lm')
@@ -47,7 +48,6 @@ if(getpass.getuser() == 'root'):
     #print('remounted')
 
 usage = shutil.disk_usage("/usbdisk.d")
-font = ImageFont.truetype(vga_font, 16)
 font_dejavu = ImageFont.truetype('/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf',13)
 
 labels = 'Used\nFree\nTotal'
@@ -101,8 +101,7 @@ draw.pieslice(xy = [(chartx, charty), (chartx+usageSize, charty+usageSize)],
              start = 0,
              end = (usage.used/usage.total) * 360)
 
-y = charty
-font = ImageFont.truetype(vga_font, 16)
+y = titlebb + 10
 font_dejavu = ImageFont.truetype('/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf',13)
 net = ifcfg.interfaces() 
 
@@ -123,6 +122,35 @@ if('usb0' in net and 'inet' in net['usb0']
     w, h = font_awesome_brands.getsize('\uf287')
     draw.text((5, y), '\uf287', inky_display.RED, font_awesome_brands)
     draw.text((w + 10, y), net['usb0']['inet'], inky_display.BLACK, font_dejavu)
+    y += h + 3
+
+y += 5
+font_dejavu = ImageFont.truetype('/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf',10)
+def draw_text(xy, text, color, font):
+    w,h = font.getsize(text)
+    draw.text(xy, text, color, font)
+    return (w, h)
+for user in psutil.users():
+    y += 2
+    x = 5
+    hMax = 0
+    w, h = draw_text((x, y), '[', inky_display.RED, font_dejavu)
+    x += w
+    hMax = max(hMax, h)
+    w, h = draw_text((x, y), user.name, inky_display.BLACK, font_dejavu)
+    x += w
+    hMax = max(hMax, h)
+    w, h = draw_text((x, y), '@', inky_display.RED, font_dejavu)
+    x += w
+    hMax = max(hMax, h)
+    host = user.terminal[:3] if user.host == '' else user.host
+    w, h = draw_text((x, y), host, inky_display.BLACK, font_dejavu)
+    x += w
+    hMax = max(hMax, h)
+    w, h = draw_text((x, y), ']', inky_display.RED, font_dejavu)
+    hMax = max(hMax, h)
+    y += hMax    
+
 
 inky_display.set_image(img)
 inky_display.show()
