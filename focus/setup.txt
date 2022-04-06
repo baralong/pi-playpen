@@ -1,7 +1,7 @@
 mkdir ~/dev
 cd dev
-sudo apt install git
-sudo apt install python3-pip
+sudo apt install git -y
+sudo apt install python3-pip -y
 
 wget -O install_pivariety_pkgs.sh https://github.com/ArduCAM/Arducam-Pivariety-V4L2-Driver/releases/download/install_script/install_pivariety_pkgs.sh
 chmod +x install_pivariety_pkgs.sh
@@ -14,8 +14,10 @@ reboot
 libcamera-still -n -o test.jpg --autofocus     
 
 git clone https://github.com/ArduCAM/Arducam-Pivariety-V4L2-Driver.git ~/dev/Arducam-Pivariety-V4L2-Driver
-cd ~/dev/Arducam-Pivariety-V4L2-Driver
+
+# need to copy the python wrapper
+
 python3 -m pip install ./libcamera-1.0.2-cp39-cp39-linux_armv7l.whl
-sudo apt-get install python3-opencv
-sudo apt install libatlas-base-dev
+sudo apt install python3-opencv -y
+sudo apt install libatlas-base-dev -y
 pip install opencv-contrib-python-headless
