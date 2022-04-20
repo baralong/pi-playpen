@@ -1,0 +1,31 @@
+# doco https://www.freedesktop.org/software/systemd/man/systemd.service.html
+# https://www.freedesktop.org/software/systemd/man/
+[Unit]
+Description=Pi camera service
+
+[Service]
+Restart=always
+RestartSec=5s
+Type=exec
+ExecStart=/usr/bin/python3 -u /home/pi/dev/pi-playpen/startup/pi-cam-startup.py
+
+[Install]
+# Wants= other service if the wanted fails this will keep going
+WantedBy=multi-user.target  
+# run in "multi-user" mode aka normal operation
+
+# put file in /etc/systemd/system
+
+# CONTROL COMMANDS
+# Make it run at boot with 
+# $ sudo systemctl enable robot.service
+# thing
+
+# Start/stop/restart it with 
+# $ sudo systemctl {stop,start,restart} robot.service
+
+# Prevent it from running at boot with 
+# $ sudo systemctl disable robot.service
+
+# View the output with 
+# $ sudo journalctl --unit=robot.service
